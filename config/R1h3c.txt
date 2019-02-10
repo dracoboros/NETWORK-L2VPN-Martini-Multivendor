@@ -1,0 +1,33 @@
+system-view
+sysname R1
+isis
+ network-entity 49.0000.0000.0001.00
+ is-level level-2
+ cost-style wide
+ is-name R1
+mpls lsr-id 10.1.255.1
+mpls ldp
+ lsr-id 10.1.255.1
+l2vpn enable
+pw-class ENCAP_ETHERNET
+ pw-type ethernet
+vsi R5_R7
+ pwsignaling ldp
+  peer 10.1.255.4 pw-id 57 pw-class ENCAP_ETHERNET
+interface Loopback0
+ ip address 10.1.255.1 32
+ isis enable 1
+interface GigabitEthernet 1/0
+ ip address 10.1.2.1 24
+ isis enable 1
+ isis circuit-type p2p
+ mpls enable
+ mpls ldp enable
+interface GigabitEthernet 2/0
+ ip address 10.1.3.1 24
+ isis enable 1
+ isis circuit-type p2p
+ mpls enable
+ mpls ldp enable
+interface GigabitEthernet 3/0
+ xconnect vsi R5_R7

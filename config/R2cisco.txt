@@ -1,0 +1,30 @@
+en
+conf t
+hostname R2
+no ip domain lookup
+line con 0
+ exec-timeout 0 0
+int Loopback0
+ ip address 10.1.255.2 255.255.255.255
+router isis
+ net 49.0000.0000.0002.00
+ metric-style wide 
+ is-type level-2-only
+ passive-interface Loopback0
+mpls ldp router-id Loopback0
+mpls ldp neighbor 10.1.255.3 targeted ldp 
+int Gi1
+ ip address 10.1.2.2 255.255.255.0
+ ip router isis
+ isis network point-to-point 
+ mpls ip
+ no shut
+int Gi2
+ ip address 10.2.4.2 255.255.255.0
+ ip router isis
+ isis network point-to-point 
+ mpls ip
+ no shut
+int Gi3
+ xconnect 10.1.255.3 68 encapsulation mpls
+ no shutdown
