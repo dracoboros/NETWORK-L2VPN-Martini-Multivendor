@@ -4,7 +4,7 @@ configure router interface "ge-1/1/1" address 10.3.4.4/24
 configure router interface "ge-1/1/1" port 1/1/1
 configure router interface "ge-1/1/2" address 10.2.4.4/24
 configure router interface "ge-1/1/2" port 1/1/2
-configure router isis area-id 49.0000
+configure router isis area-id 49
 configure router isis level-capability level-2
 configure router isis level 2 wide-metrics-only
 configure router isis interface "system" passive 
